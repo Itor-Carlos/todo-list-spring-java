@@ -1,9 +1,19 @@
 package com.ifba.dev.todolist.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="todo")
 public class Todo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name="name",nullable = false)
     private String name;
+
+    @Column(name = "descricao",nullable = false)
     private String descricao;
 
     public Todo(){}
