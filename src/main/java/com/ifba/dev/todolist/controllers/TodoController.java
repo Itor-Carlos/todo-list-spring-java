@@ -5,11 +5,9 @@ import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -36,6 +34,18 @@ public class TodoController {
         }
         catch (NoSuchElementException errorNotFound){
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<?> salvar(@RequestBody Todo todo){
+        try{
+            Todo todoSalvo = this.todoService.salvar(todo);
+            URI location = URI.create("/todos/"+todoSalvo.getId());
+            return ResponseEntity.created(location).body(todoSalvo);
+        }
+        catch (IllegalArgumentException errorArguments){
+            return ResponseEntity.badRequest().body(errorArguments.getMessage());
         }
     }
 
