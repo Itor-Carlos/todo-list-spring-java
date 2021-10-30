@@ -26,6 +26,23 @@ public class TodoService {
         return todo;
     }
 
+    public Todo salvar(Todo todo){
+        if(todo.getDescricao() == null){
+            throw new IllegalArgumentException("A descrição não pode ser nulo");
+        }
+        if(todo.getDescricao() == ""){
+            throw new IllegalArgumentException("A descrição não pode estar vazio");
+        }
+
+        if(todo.getName() == null){
+            throw new IllegalArgumentException("O nome não pode ser nulo");
+        }
+        if(todo.getName() == ""){
+            throw new IllegalArgumentException("O nome não pode estar vazio");
+        }
+
+        return this.todoRepository.save(todo);
+    }
 
 
 }
