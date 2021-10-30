@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @RestController
@@ -32,7 +34,7 @@ public class TodoController {
             Todo todo = this.todoService.buscar(id);
             return ResponseEntity.ok(todo);
         }
-        catch (EntityNotFoundException errorNotFound){
+        catch (NoSuchElementException errorNotFound){
             return ResponseEntity.notFound().build();
         }
     }
