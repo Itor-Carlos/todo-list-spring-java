@@ -49,6 +49,7 @@ public class TodoService {
         if (todo == null) {
             throw new EntityNotFoundException("não foi encontrado nenhum todo com o id registrado");
         }
+        this.todoRepository.delete(todo);
     }
 
 }
