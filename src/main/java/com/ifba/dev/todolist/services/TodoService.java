@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -20,10 +21,8 @@ public class TodoService {
     }
 
     public Todo buscar(Long id){
-        Todo todo = this.todoRepository.getById(id);
-        if(todo == null){
-            throw new EntityNotFoundException("não foi encontrado nenhum Todo com o id passado");
-        }
+        Optional<Todo> optionalTodo = this.todoRepository.findById(id);
+        Todo todo = optionalTodo.get();
         return todo;
     }
 
