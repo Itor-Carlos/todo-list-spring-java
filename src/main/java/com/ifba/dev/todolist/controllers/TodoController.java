@@ -60,4 +60,21 @@ public class TodoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> alterar(@RequestBody Todo todo, @PathVariable("id") Long id){
+        try{
+            Todo todoModificado = this.todoService.alterar(todo,id);
+            return ResponseEntity.ok(todoModificado);
+        }
+        catch(IllegalArgumentException errorArguments){
+            return ResponseEntity.badRequest().body(errorArguments.getMessage());
+        }
+        catch (NoSuchElementException error){
+            return ResponseEntity.badRequest().body(error.getMessage());
+        }
+        catch (EntityNotFoundException errorNotFound){
+            return ResponseEntity.badRequest().body(errorNotFound.getMessage());
+        }
+    }
+
 }
