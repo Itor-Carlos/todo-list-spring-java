@@ -52,6 +52,7 @@ public class TodoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Todo> deletar(@PathVariable("id") Long id){
         try{
+            this.todoService.deletar(id);
             return ResponseEntity.ok().build();
         }
         catch(EntityNotFoundException erro){
