@@ -3,10 +3,12 @@ package com.ifba.dev.todolist.services;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.repositories.TodoRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -51,5 +53,35 @@ public class TodoService {
         }
         this.todoRepository.delete(todo);
     }
+
+    public Todo alterar(Todo todo, Long id){
+
+        if(todo == null){
+            throw new NoSuchElementException("todo nao pode ser null");
+        }
+
+        if(todo.getDescricao() == null){
+            throw new IllegalArgumentException("a descricao do todo nao pode ser nula");
+        }
+        if(todo.getDescricao() == ""){
+            throw new IllegalArgumentException("a descricao do todo nao pode estar vazia");
+        }
+        if(todo.getName() == null){
+            throw new IllegalArgumentException("o nome nao pode ser nulo");
+        }
+        if(todo.getName() == ""){
+            throw new IllegalArgumentException("o nome não pode estar vazio");
+        }
+
+        Todo todoModificado = this.todoRepository.searchForId(id);
+
+        if(todoModificado == null){
+            throw new EntityNotFoundException("nao foi encontrado nenhum Todo no id passado");
+        }
+
+        BeanUtils.copyProperties(todo,todoModificado,"id");
+        return this.todoRepository.save(todoModificado);
+    }
+
 
 }
