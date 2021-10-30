@@ -44,5 +44,11 @@ public class TodoService {
         return this.todoRepository.save(todo);
     }
 
+    public void deletar(Long id){
+        Todo todo = this.todoRepository.searchForId(id);
+        if (todo == null) {
+            throw new EntityNotFoundException("não foi encontrado nenhum todo com o id registrado");
+        }
+    }
 
 }
