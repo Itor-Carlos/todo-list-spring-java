@@ -16,4 +16,5 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
     List<Todo> findByNameContaining(String name);
 
+    List<Todo> findByDescricaoContaining(String descricao);
 }
