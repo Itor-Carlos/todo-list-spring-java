@@ -83,5 +83,15 @@ public class TodoService {
         return this.todoRepository.save(todoModificado);
     }
 
+    public List<Todo> findByNameContaining(String name){
+        if(name == ""){
+            throw new IllegalArgumentException("the name cannot be empty");
+        }
+        if(name == null){
+            throw new IllegalArgumentException("the name cannot be null");
+        }
+        return this.todoRepository.findByNameContaining(name);
+    }
+
 
 }
