@@ -89,4 +89,14 @@ public class TodoController {
         }
     }
 
+    @GetMapping("/pesquisa-descricao")
+    public ResponseEntity<?> findByDescricaoContaining(@Param("descricao")String descricao){
+        try{
+            List<Todo> listaFiltrada = this.todoService.findByDescricaoContaining(descricao);
+            return ResponseEntity.ok(listaFiltrada);
+        }
+        catch (IllegalArgumentException illegalArgumentException){
+            return ResponseEntity.badRequest().body(illegalArgumentException.getMessage());
+        }
+    }
 }
