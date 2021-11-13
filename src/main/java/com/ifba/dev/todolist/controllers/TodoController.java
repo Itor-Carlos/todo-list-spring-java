@@ -28,10 +28,13 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Todo> buscar(@PathVariable("id") Long id){
+    public ResponseEntity<?> buscar(@PathVariable("id") Long id){
         try{
             Todo todo = this.todoService.buscar(id);
             return ResponseEntity.ok(todo);
+        }
+        catch (IllegalArgumentException errorIllegalArgument){
+            return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
         }
         catch (NoSuchElementException errorNotFound){
             return ResponseEntity.notFound().build();
