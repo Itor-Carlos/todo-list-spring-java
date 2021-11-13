@@ -78,16 +78,7 @@ public class TodoController {
         }
     }
 
-    @GetMapping("/pesquisa-name")
-    public ResponseEntity<?> findByNameContaining(@Param("name")String name){
-        try{
-            List<Todo> listaFiltros = this.todoService.findByNameContaining(name);
-            return ResponseEntity.ok(listaFiltros);
-        }
-        catch (IllegalArgumentException illegalArgumentException){
-            return ResponseEntity.badRequest().body(illegalArgumentException.getMessage());
-        }
-    }
+    
 
     @GetMapping("/pesquisa-descricao")
     public ResponseEntity<?> findByDescricaoContaining(@Param("descricao")String descricao){
