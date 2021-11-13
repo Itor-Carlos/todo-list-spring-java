@@ -52,11 +52,11 @@ public class TodoService {
     }
 
     public void deletar(Long id){
-        Todo todo = this.todoRepository.searchForId(id);
-        if (todo == null) {
-            throw new EntityNotFoundException("não foi encontrado nenhum todo com o id registrado");
+        if(id < 1){
+            throw new IllegalArgumentException("the id most be higher or equals 1");
         }
-        this.todoRepository.delete(todo);
+        Optional<Todo> optionalTodo = this.todoRepository.findById(id);
+        this.todoRepository.delete(optionalTodo.get());
     }
 
     public Todo alterar(Todo todo, Long id){
