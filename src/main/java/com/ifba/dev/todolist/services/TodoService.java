@@ -24,8 +24,13 @@ public class TodoService {
 
     public Todo buscar(Long id){
         Optional<Todo> optionalTodo = this.todoRepository.findById(id);
-        Todo todo = optionalTodo.get();
-        return todo;
+        if(id < 1){
+            throw new IllegalArgumentException("the id most be higher or equals 1");
+        }
+        if(!optionalTodo.isPresent()){
+            throw new NoSuchElementException("Todo not found");
+        }
+        return optionalTodo.get();
     }
 
     public Todo salvar(Todo todo){
