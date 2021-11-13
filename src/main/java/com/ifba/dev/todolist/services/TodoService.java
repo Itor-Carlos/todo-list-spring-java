@@ -78,14 +78,14 @@ public class TodoService {
             throw new IllegalArgumentException("o nome não pode estar vazio");
         }
 
-        Todo todoModificado = this.todoRepository.searchForId(id);
+        Optional<Todo> optionalTodoModificado = this.todoRepository.findById(id);
 
-        if(todoModificado == null){
+        if(!optionalTodoModificado.isPresent()){
             throw new EntityNotFoundException("nao foi encontrado nenhum Todo no id passado");
         }
 
-        BeanUtils.copyProperties(todo,todoModificado,"id");
-        return this.todoRepository.save(todoModificado);
+        BeanUtils.copyProperties(todo,optionalTodoModificado.get(),"id");
+        return this.todoRepository.save(optionalTodoModificado.get());
     }
 
 
