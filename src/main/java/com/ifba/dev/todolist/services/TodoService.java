@@ -83,14 +83,6 @@ public class TodoService {
         return this.todoRepository.save(todoModificado);
     }
 
-    public List<Todo> findByDescricaoContaining(String descricao){
-        if (descricao == ""){
-            throw new IllegalArgumentException("the descricao cannot be empty");
-        }
-        if(descricao == null){
-            throw new IllegalArgumentException("the descricao cannot be null");
-        }
-        return this.todoRepository.findByDescricaoContaining(descricao);
-    }
+
 
 }
