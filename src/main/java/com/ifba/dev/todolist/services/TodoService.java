@@ -2,7 +2,7 @@ package com.ifba.dev.todolist.services;
 
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
-import com.ifba.dev.todolist.repositories.TodoRepository;
+import com.ifba.dev.todolist.repositories.interfaces.TodoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

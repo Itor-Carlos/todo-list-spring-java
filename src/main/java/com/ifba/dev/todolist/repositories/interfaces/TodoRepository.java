@@ -1,4 +1,4 @@
-package com.ifba.dev.todolist.repositories;
+package com.ifba.dev.todolist.repositories.interfaces;
 
 import com.ifba.dev.todolist.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
