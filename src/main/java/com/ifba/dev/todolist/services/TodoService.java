@@ -88,6 +88,12 @@ public class TodoService {
         return this.todoRepository.save(optionalTodoModificado.get());
     }
 
+    public List<Todo> find(Long id, String name, String descricao){
+        if(id != null && id < 1){
+            throw new IllegalArgumentException("the id most be higher or equals 1");
+        }
+        return this.todoRepository.find(id,name,descricao);
+    }
 
 
 }

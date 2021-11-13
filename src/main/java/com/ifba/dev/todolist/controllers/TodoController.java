@@ -83,4 +83,15 @@ public class TodoController {
             return ResponseEntity.badRequest().body(errorNotFound.getMessage());
         }
     }
+
+    @GetMapping(path = "/pesquisa")
+    public ResponseEntity<?> find(@Param("id") Long id, @Param("name") String name, @Param("descricao") String descricao){
+        try{
+            List<Todo> listaResultado = this.todoService.find(id,name,descricao);
+            return ResponseEntity.ok(listaResultado);
+        }
+        catch (IllegalArgumentException errorIllegalArgument){
+            return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
+        }
+    }
 }
