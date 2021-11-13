@@ -14,7 +14,7 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
     @Query("select t FROM Todo t WHERE t.id=:id")
     Todo searchForId(@Param("id") Long id);
 
-    
 
-    List<Todo> findByDescricaoContaining(String descricao);
+
+
 }
