@@ -56,7 +56,7 @@ public class TodoService {
             throw new IllegalArgumentException("the id most be higher or equals 1");
         }
         Optional<Todo> optionalTodo = this.todoRepository.findById(id);
-        this.todoRepository.delete(optionalTodo.get());
+        this.todoRepository.deleteById(optionalTodo.get().getId());
     }
 
     public Todo alterar(Todo todo, Long id){
