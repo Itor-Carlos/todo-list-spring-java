@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo,Long> {
 
-    @Query("select t FROM Todo t WHERE t.id=:id")
-    Todo searchForId(@Param("id") Long id);
+
 
     public List<Todo> find(Long id, String name, String descricao);
 
