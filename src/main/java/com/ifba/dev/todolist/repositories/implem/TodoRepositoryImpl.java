@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,10 @@ public class TodoRepositoryImpl {
 
         mapaParametros.forEach((chave,valor) -> query.setParameter(chave,valor));
         return query.getResultList();
+    }
+
+    public void deleteById(Long id){
+        Query query = entityManager.createQuery(("Delete FROM Todo WHERE id = " + id));
     }
 
 }
