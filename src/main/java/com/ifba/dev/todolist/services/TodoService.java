@@ -1,5 +1,6 @@
 package com.ifba.dev.todolist.services;
 
+import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.repositories.interfaces.TodoRepository;
@@ -88,11 +89,11 @@ public class TodoService {
         return this.todoRepository.save(optionalTodoModificado.get());
     }
 
-    public List<Todo> find(Long id, String name, String descricao){
+    public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus){
         if(id != null && id < 1){
             throw new IllegalArgumentException("the id most be higher or equals 1");
         }
-        return this.todoRepository.find(id,name,descricao);
+        return this.todoRepository.find(id,name,descricao,todoStatus);
     }
 
 
