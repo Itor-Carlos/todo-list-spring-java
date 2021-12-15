@@ -1,5 +1,7 @@
 package com.ifba.dev.todolist.model;
 
+import com.ifba.dev.todolist.enums.TodoStatus;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,12 +18,17 @@ public class Todo {
     @Column(name = "descricao",nullable = false)
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10,nullable = false)
+    private TodoStatus todoStatus;
+
     public Todo(){}
 
-    public Todo(Long id, String name, String descricao){
+    public Todo(Long id, String name, String descricao, TodoStatus todoStatus){
         this.id = id;
         this.name = name;
         this.descricao = descricao;
+        this.todoStatus = todoStatus;
     }
 
     public Long getId() {
@@ -46,5 +53,13 @@ public class Todo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public TodoStatus getTodoStatus() {
+        return todoStatus;
+    }
+
+    public void setTodoStatus(TodoStatus todoStatus) {
+        this.todoStatus = todoStatus;
     }
 }

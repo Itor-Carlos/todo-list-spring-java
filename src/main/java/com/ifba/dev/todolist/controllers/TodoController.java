@@ -1,5 +1,6 @@
 package com.ifba.dev.todolist.controllers;
 
+import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.services.TodoService;
@@ -85,9 +86,9 @@ public class TodoController {
     }
 
     @GetMapping(path = "/pesquisa")
-    public ResponseEntity<?> find(@Param("id") Long id, @Param("name") String name, @Param("descricao") String descricao){
+    public ResponseEntity<?> find(@Param("id") Long id, @Param("name") String name, @Param("descricao") String descricao, @RequestParam("todoStatus")TodoStatus todoStatus){
         try{
-            List<Todo> listaResultado = this.todoService.find(id,name,descricao);
+            List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
             return ResponseEntity.ok(listaResultado);
         }
         catch (IllegalArgumentException errorIllegalArgument){

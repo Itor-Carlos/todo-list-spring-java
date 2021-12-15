@@ -1,5 +1,6 @@
 package com.ifba.dev.todolist.repositories.implem;
 
+import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.model.Todo;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,7 @@ public class TodoRepositoryImpl {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Todo> find(Long id, String name, String descricao){
+    public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus){
 
         StringBuilder jpql = new StringBuilder();
         jpql.append("from Todo WHERE 0 = 0 ");
@@ -35,6 +36,16 @@ public class TodoRepositoryImpl {
         if(descricao != null){
             jpql.append("and descricao LIKE :descricao");
             mapaParametros.put("descricao","%"+descricao+"%");
+        }
+
+        if(todoStatus != null){
+            jpql.append("and todoStatus LIKE :todoStatus");
+            if(todoStatus == TodoStatus.CONCLUIDO){
+                mapaParametros.put("todoStatus",TodoStatus.CONCLUIDO);
+            }
+            if(todoStatus == TodoStatus.PENDENTE){
+                mapaParametros.put("todoStatus",TodoStatus.PENDENTE);
+            }
         }
 
         TypedQuery<Todo> query = this.entityManager.createQuery(jpql.toString(),Todo.class);
