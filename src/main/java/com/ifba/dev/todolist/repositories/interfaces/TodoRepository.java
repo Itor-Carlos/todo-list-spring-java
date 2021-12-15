@@ -1,5 +1,6 @@
 package com.ifba.dev.todolist.repositories.interfaces;
 
+import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +14,7 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
 
 
-    public List<Todo> find(Long id, String name, String descricao);
+    public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus);
 
     public void deleteById(Long id);
 
