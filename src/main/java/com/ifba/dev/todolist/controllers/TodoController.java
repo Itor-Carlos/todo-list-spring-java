@@ -71,8 +71,8 @@ public class TodoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> alterar(@RequestBody Todo todo, @PathVariable("id") Long id){
         try{
-            Todo todoModificado = this.todoService.alterar(todo,id);
-            return ResponseEntity.ok(todoModificado);
+            this.todoService.alterar(todo,id);
+            return ResponseEntity.ok().build();
         }
         catch(IllegalArgumentException errorArguments){
             return ResponseEntity.badRequest().body(errorArguments.getMessage());

@@ -58,4 +58,33 @@ public class TodoRepositoryImpl {
         Query query = entityManager.createQuery(("Delete FROM Todo WHERE id = " + id));
     }
 
+    public void updateTodo(Long id, Todo todo){
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("UPDATE Todo SET id = :id ");
+        Map<String,Object> parametros = new HashMap<>();
+
+        if(todo.getName() != null){
+            jpql.append(", name = :name");
+            parametros.put("name",todo.getName());
+        }
+
+        if(todo.getDescricao() != null){
+            jpql.append(", descricao = :descricao");
+            parametros.put("descricao",todo.getDescricao());
+        }
+        if(todo.getTodoStatus() != null){
+            jpql.append(", todoStatus = :status");
+            switch (todo.getTodoStatus()){
+                case PENDENTE: parametros.put("status",TodoStatus.PENDENTE);break;
+                case CONCLUIDO: parametros.put("status",TodoStatus.CONCLUIDO);break;
+            }
+        }
+
+        jpql.append(" WHERE id = :id");
+        parametros.put("id",id);
+
+        Query queryUpdate = this.entityManager.createQuery(jpql.toString());
+        parametros.forEach((key,value) -> queryUpdate.setParameter(key,value));
+        queryUpdate.executeUpdate();
+    }
 }

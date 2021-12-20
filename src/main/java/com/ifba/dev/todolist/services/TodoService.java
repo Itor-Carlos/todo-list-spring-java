@@ -60,33 +60,12 @@ public class TodoService {
         this.todoRepository.deleteById(optionalTodo.get().getId());
     }
 
-    public Todo alterar(Todo todo, Long id){
-
-        if(todo == null){
-            throw new NoSuchElementException("todo nao pode ser null");
-        }
-
-        if(todo.getDescricao() == null){
-            throw new IllegalArgumentException("a descricao do todo nao pode ser nula");
-        }
-        if(todo.getDescricao() == ""){
-            throw new IllegalArgumentException("a descricao do todo nao pode estar vazia");
-        }
-        if(todo.getName() == null){
-            throw new IllegalArgumentException("o nome nao pode ser nulo");
-        }
-        if(todo.getName() == ""){
-            throw new IllegalArgumentException("o nome não pode estar vazio");
-        }
-
+    public void alterar(Todo todo, Long id){
         Optional<Todo> optionalTodoModificado = this.todoRepository.findById(id);
-
         if(!optionalTodoModificado.isPresent()){
             throw new EntityNotFoundException("nao foi encontrado nenhum Todo no id passado");
         }
-
-        BeanUtils.copyProperties(todo,optionalTodoModificado.get(),"id");
-        return this.todoRepository.save(optionalTodoModificado.get());
+        this.todoRepository.updateTodo(id,todo);
     }
 
     public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus){
