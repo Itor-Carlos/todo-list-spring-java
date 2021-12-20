@@ -40,11 +40,9 @@ public class TodoRepositoryImpl {
 
         if(todoStatus != null){
             jpql.append("and todoStatus LIKE :todoStatus");
-            if(todoStatus == TodoStatus.CONCLUIDO){
-                mapaParametros.put("todoStatus",TodoStatus.CONCLUIDO);
-            }
-            if(todoStatus == TodoStatus.PENDENTE){
-                mapaParametros.put("todoStatus",TodoStatus.PENDENTE);
+            switch (todoStatus){
+                case PENDENTE: mapaParametros.put("todoStatus",TodoStatus.PENDENTE);break;
+                case CONCLUIDO: mapaParametros.put("todoStatus",TodoStatus.CONCLUIDO);break;
             }
         }
 
