@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -18,5 +19,7 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
     public void deleteById(Long id);
 
+    @Transactional
+    public void updateTodo(Long id, Todo todo);
 
 }
