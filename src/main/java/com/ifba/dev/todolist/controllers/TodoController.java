@@ -6,6 +6,7 @@ import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +23,13 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Todo>> listar(){
         List<Todo> listaGeral = this.todoService.getAll();
         return ResponseEntity.ok(listaGeral);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> buscar(@PathVariable("id") Long id){
         try{
             Todo todo = this.todoService.buscar(id);
@@ -42,7 +43,7 @@ public class TodoController {
         }
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> salvar(@RequestBody Todo todo){
         try{
             Todo todoSalvo = this.todoService.salvar(todo);
@@ -68,7 +69,7 @@ public class TodoController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> alterar(@RequestBody Todo todo, @PathVariable("id") Long id){
         try{
             this.todoService.alterar(todo,id);
@@ -85,7 +86,7 @@ public class TodoController {
         }
     }
 
-    @GetMapping(path = "/pesquisa")
+    @GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> find(@Param("id") Long id, @Param("name") String name, @Param("descricao") String descricao, @RequestParam("todoStatus")TodoStatus todoStatus){
         try{
             List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
