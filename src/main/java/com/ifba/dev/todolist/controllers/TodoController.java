@@ -71,9 +71,9 @@ public class TodoController {
     }
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> alterar(@RequestBody Todo todo, @PathVariable("id") Long id){
+    public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") Long id){
         try{
-            this.todoService.alterar(todo,id);
+            this.todoService.alterar(todoDTO.toTodo(),id);
             return ResponseEntity.ok().build();
         }
         catch(IllegalArgumentException errorArguments){
