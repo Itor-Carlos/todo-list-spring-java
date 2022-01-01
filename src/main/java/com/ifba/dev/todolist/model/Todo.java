@@ -24,6 +24,12 @@ public class Todo {
 
     public Todo(){}
 
+    public Todo(String name, String descricao, TodoStatus todoStatus) {
+        this.name = name;
+        this.descricao = descricao;
+        this.todoStatus = todoStatus;
+    }
+
     public Todo(Long id, String name, String descricao, TodoStatus todoStatus){
         this.id = id;
         this.name = name;
