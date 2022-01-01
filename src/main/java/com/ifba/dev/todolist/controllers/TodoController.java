@@ -1,5 +1,6 @@
 package com.ifba.dev.todolist.controllers;
 
+import com.ifba.dev.todolist.dto.TodoDTO;
 import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
@@ -44,9 +45,9 @@ public class TodoController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> salvar(@RequestBody Todo todo){
+    public ResponseEntity<?> salvar(@RequestBody TodoDTO todoDTO){
         try{
-            Todo todoSalvo = this.todoService.salvar(todo);
+            Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
             URI location = URI.create("/todos/"+todoSalvo.getId());
             return ResponseEntity.created(location).body(todoSalvo);
         }
