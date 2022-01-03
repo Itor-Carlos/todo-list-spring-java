@@ -39,7 +39,7 @@ public class TodoController {
         catch (IllegalArgumentException errorIllegalArgument){
             return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
         }
-        catch (NoSuchElementException errorNotFound){
+        catch (EntityNotFoundException entityNotFoundException){
             return ResponseEntity.notFound().build();
         }
     }
