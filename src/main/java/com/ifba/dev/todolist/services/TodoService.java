@@ -24,14 +24,10 @@ public class TodoService {
     }
 
     public Todo buscar(Long id){
-        Optional<Todo> optionalTodo = this.todoRepository.findById(id);
         if(id < 1){
             throw new IllegalArgumentException("the id most be higher or equals 1");
         }
-        if(!optionalTodo.isPresent()){
-            throw new NoSuchElementException("Todo not found");
-        }
-        return optionalTodo.get();
+        return this.todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
     }
 
     public Todo salvar(Todo todo){
@@ -56,8 +52,8 @@ public class TodoService {
         if(id < 1){
             throw new IllegalArgumentException("the id most be higher or equals 1");
         }
-        Optional<Todo> optionalTodo = this.todoRepository.findById(id);
-        this.todoRepository.deleteById(optionalTodo.get().getId());
+        this.todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+        this.todoRepository.deleteById(id);
     }
 
     public void alterar(Todo todo, Long id){

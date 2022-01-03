@@ -39,7 +39,7 @@ public class TodoController {
         catch (IllegalArgumentException errorIllegalArgument){
             return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
         }
-        catch (NoSuchElementException errorNotFound){
+        catch (EntityNotFoundException entityNotFoundException){
             return ResponseEntity.notFound().build();
         }
     }
@@ -62,7 +62,7 @@ public class TodoController {
             this.todoService.deletar(id);
             return ResponseEntity.noContent().build();
         }
-        catch(NoSuchElementException erro){
+        catch(EntityNotFoundException entityNotFoundException){
             return ResponseEntity.notFound().build();
         }
         catch (IllegalArgumentException errorIllegalArgument){
