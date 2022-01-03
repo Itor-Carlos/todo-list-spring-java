@@ -62,7 +62,7 @@ public class TodoController {
             this.todoService.deletar(id);
             return ResponseEntity.noContent().build();
         }
-        catch(NoSuchElementException erro){
+        catch(EntityNotFoundException entityNotFoundException){
             return ResponseEntity.notFound().build();
         }
         catch (IllegalArgumentException errorIllegalArgument){
