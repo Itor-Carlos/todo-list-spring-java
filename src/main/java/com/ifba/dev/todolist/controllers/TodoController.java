@@ -32,69 +32,32 @@ public class TodoController {
 
     @GetMapping(path ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> buscar(@PathVariable("id") Long id){
-        try{
-            Todo todo = this.todoService.buscar(id);
-            return ResponseEntity.ok(todo);
-        }
-        catch (IllegalArgumentException errorIllegalArgument){
-            return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
-        }
-        catch (EntityNotFoundException entityNotFoundException){
-            return ResponseEntity.notFound().build();
-        }
+        Todo todo = this.todoService.buscar(id);
+        return ResponseEntity.ok(todo);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> salvar(@RequestBody TodoDTO todoDTO){
-        try{
-            Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
-            URI location = URI.create("/todos/"+todoSalvo.getId());
-            return ResponseEntity.created(location).body(todoSalvo);
-        }
-        catch (IllegalArgumentException errorArguments){
-            return ResponseEntity.badRequest().body(errorArguments.getMessage());
-        }
+        Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
+        URI location = URI.create("/todos/"+todoSalvo.getId());
+        return ResponseEntity.created(location).body(todoSalvo);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable("id") Long id){
-        try{
-            this.todoService.deletar(id);
-            return ResponseEntity.noContent().build();
-        }
-        catch(EntityNotFoundException entityNotFoundException){
-            return ResponseEntity.notFound().build();
-        }
-        catch (IllegalArgumentException errorIllegalArgument){
-            return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
-        }
+        this.todoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") Long id){
-        try{
-            this.todoService.alterar(todoDTO.toTodo(),id);
-            return ResponseEntity.ok().build();
-        }
-        catch(IllegalArgumentException errorArguments){
-            return ResponseEntity.badRequest().body(errorArguments.getMessage());
-        }
-        catch (NoSuchElementException error){
-            return ResponseEntity.badRequest().body(error.getMessage());
-        }
-        catch (EntityNotFoundException errorNotFound){
-            return ResponseEntity.badRequest().body(errorNotFound.getMessage());
-        }
+        this.todoService.alterar(todoDTO.toTodo(),id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> find(@RequestParam(name = "id",required = false) Long id, @RequestParam(name = "name",required = false) String name, @RequestParam(name = "descricao",required = false) String descricao, @RequestParam(name = "todoStatus",required = false)TodoStatus todoStatus){
-        try{
-            List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
-            return ResponseEntity.ok(listaResultado);
-        }
-        catch (IllegalArgumentException errorIllegalArgument){
-            return ResponseEntity.badRequest().body(errorIllegalArgument.getMessage());
-        }
+        List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
+        return ResponseEntity.ok(listaResultado);
     }
 }
