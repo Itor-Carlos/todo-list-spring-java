@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -37,7 +38,7 @@ public class TodoController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> salvar(@RequestBody TodoDTO todoDTO){
+    public ResponseEntity<?> salvar(@RequestBody @Valid TodoDTO todoDTO){
         Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
         URI location = URI.create("/todos/"+todoSalvo.getId());
         return ResponseEntity.created(location).body(todoSalvo);
