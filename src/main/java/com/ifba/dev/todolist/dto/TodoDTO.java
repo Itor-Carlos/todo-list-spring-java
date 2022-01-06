@@ -3,10 +3,16 @@ package com.ifba.dev.todolist.dto;
 import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.model.Todo;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class TodoDTO {
 
+    @NotBlank(message = "The name cannot be null")
     private String name;
+    @NotNull(message = "The descricao cannot be null")
     private String descricao;
+    @NotNull(message = "The todoStatus cannot be null")
     private TodoStatus todoStatus;
 
     public TodoDTO() {
