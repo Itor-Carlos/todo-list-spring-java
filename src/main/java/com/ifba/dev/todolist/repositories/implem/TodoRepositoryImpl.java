@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,7 @@ public class TodoRepositoryImpl {
 
     public void deleteById(Long id){
         Query query = entityManager.createQuery(("Delete FROM Todo WHERE id = " + id));
+        query.executeUpdate();
     }
 
     public void updateTodo(Long id, Todo todo){

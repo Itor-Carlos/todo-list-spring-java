@@ -17,6 +17,7 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
     public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus);
 
+    @Transactional
     public void deleteById(Long id);
 
     @Transactional
