@@ -5,6 +5,8 @@ import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundExceptionDetails;
 import com.ifba.dev.todolist.exceptions.IllegalArgumentExceptionDetails;
 import com.ifba.dev.todolist.exceptions.MethodArgumentNotValidExceptionDetails;
+import com.ifba.dev.todolist.exceptions.TodoFieldNotValidExceptionDetails;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -43,20 +47,21 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<MethodArgumentNotValidExceptionDetails> methodArgumentException(MethodArgumentNotValidException methodArgumentNotValidException){
+    public ResponseEntity<TodoFieldNotValidExceptionDetails> todoFieldNotValidException(MethodArgumentNotValidException methodArgumentNotValidException){
 
         List<FieldError> fieldErrorList = methodArgumentNotValidException.getBindingResult().getFieldErrors();
-        String fieldMessage = fieldErrorList.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining());
-        String fieldError = fieldErrorList.stream().map(FieldError::getField).collect(Collectors.joining());
+        List<String> fieldMessage = fieldErrorList.stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());//get the message of this errors
+        List<String> fieldError = fieldErrorList.stream().map(FieldError::getField).collect(Collectors.toList());;//get the name of field of this erros
 
-        MethodArgumentNotValidExceptionDetails methodArgumentException = new MethodArgumentNotValidExceptionDetails(
-                fieldMessage,
-                HttpStatus.BAD_REQUEST.value(),
-                LocalDateTime.now(),
-                "Method Argument Not Valid Exception",
-                fieldError
-        );
-        return new ResponseEntity<>(methodArgumentException,HttpStatus.BAD_REQUEST);
+        Map<String,String> messageErrors = new HashMap<>();
+
+        for(int i = 0; i<fieldErrorList.size();i++){
+            messageErrors.put(fieldError.get(i), fieldMessage.get(i));
+        }
+
+        TodoFieldNotValidExceptionDetails todoFieldNotValidExceptionDetails = new TodoFieldNotValidExceptionDetails(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(), "TodoFieldNotValidExceptionDetails", messageErrors);
+        
+        return new ResponseEntity<>(todoFieldNotValidExceptionDetails,HttpStatus.BAD_REQUEST);
     }
 
 }
