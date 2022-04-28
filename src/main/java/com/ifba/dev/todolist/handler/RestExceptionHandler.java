@@ -23,10 +23,10 @@ public class RestExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<EntityNotFoundExceptionDetails> todoNotFound(EntityNotFoundException entityNotFoundException){
         EntityNotFoundExceptionDetails todoNotFound = new EntityNotFoundExceptionDetails(
-                "Todo not found in this id",
                 HttpStatus.NOT_FOUND.value(),
                 LocalDateTime.now(),
-                "Entity Not Found"
+                "Entity Not Found",
+                "Todo not found in this id"
         );
         return new ResponseEntity<>(todoNotFound,HttpStatus.NOT_FOUND);
     }
@@ -34,10 +34,10 @@ public class RestExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<IllegalArgumentExceptionDetails> illegalArgumentException(IllegalArgumentException illegalArgumentException){
         IllegalArgumentExceptionDetails illegalArgument = new IllegalArgumentExceptionDetails(
-                illegalArgumentException.getMessage(),
                 HttpStatus.BAD_REQUEST.value(),
                 LocalDateTime.now(),
-                "Illegal Argument"
+                "Illegal Argument",
+                illegalArgumentException.getMessage()
         );
         return new ResponseEntity<>(illegalArgument,HttpStatus.BAD_REQUEST);
     }
