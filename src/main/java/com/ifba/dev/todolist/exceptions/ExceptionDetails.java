@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 public class ExceptionDetails {
 
-    private String message;
     private int httpStatus;
     private LocalDateTime timeStamp;
     private String exception;
@@ -12,19 +11,10 @@ public class ExceptionDetails {
     public ExceptionDetails() {
     }
 
-    public ExceptionDetails(String message, int httpStatus, LocalDateTime timeStamp, String exception) {
-        this.message = message;
+    public ExceptionDetails(int httpStatus, LocalDateTime timeStamp, String exception) {
         this.httpStatus = httpStatus;
         this.timeStamp = timeStamp;
         this.exception = exception;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public int getHttpStatus() {
