@@ -7,10 +7,22 @@ import java.time.LocalDateTime;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class EntityNotFoundExceptionDetails extends ExceptionDetails{
+
+    private String message;
+
     public EntityNotFoundExceptionDetails() {
     }
 
-    public EntityNotFoundExceptionDetails(String message, int httpStatus, LocalDateTime timeStamp, String exception) {
-        super(message, httpStatus, timeStamp, exception);
+    public EntityNotFoundExceptionDetails(int httpStatus, LocalDateTime timeStamp, String exception, String message) {
+        super(httpStatus, timeStamp, exception);
+        this.message = message;
+    }
+
+    public String getMessage(){
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
