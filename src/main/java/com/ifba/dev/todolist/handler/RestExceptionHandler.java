@@ -4,7 +4,6 @@ package com.ifba.dev.todolist.handler;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundExceptionDetails;
 import com.ifba.dev.todolist.exceptions.IllegalArgumentExceptionDetails;
-import com.ifba.dev.todolist.exceptions.MethodArgumentNotValidExceptionDetails;
 import com.ifba.dev.todolist.exceptions.TodoFieldNotValidExceptionDetails;
 
 import org.springframework.http.HttpStatus;
