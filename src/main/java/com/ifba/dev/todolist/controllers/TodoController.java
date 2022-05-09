@@ -3,6 +3,8 @@ package com.ifba.dev.todolist.controllers;
 import com.ifba.dev.todolist.dto.TodoDTO;
 import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
+import com.ifba.dev.todolist.exceptions.EntityNotFoundExceptionDetails;
+import com.ifba.dev.todolist.exceptions.IllegalArgumentExceptionDetails;
 import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,18 @@ public class TodoController {
         return ResponseEntity.ok(listaGeral);
     }
 
+    @Operation(summary = "Search a specific Todo using id as a parameter")//describe the objective of this method
+    @ApiResponses(value = {//maps the possible code states, their description, mediaType type and the returned object
+        @ApiResponse(responseCode = "200", description = "Todo found", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Todo.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Id not valid", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = IllegalArgumentExceptionDetails.class))
+        }),
+        @ApiResponse(responseCode = "404", description = "Todo not found", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
+        })
+    })
     @GetMapping(path ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> buscar(@PathVariable("id") Long id){
         Todo todo = this.todoService.buscar(id);
