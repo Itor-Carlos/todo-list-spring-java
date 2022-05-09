@@ -79,6 +79,18 @@ public class TodoController {
         return ResponseEntity.created(location).body(todoSalvo);
     }
 
+    @Operation(summary = "Delete a specific Todo usign id as a parameter")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Todo deleted", content = {
+            @Content(mediaType = "application/json")
+        }),
+        @ApiResponse(responseCode = "400", description = "Id not valid", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
+        }),
+        @ApiResponse(responseCode = "404", description = "Todo not found. Operation cannot continue", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
+        })
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable("id") Long id){
         this.todoService.deletar(id);
