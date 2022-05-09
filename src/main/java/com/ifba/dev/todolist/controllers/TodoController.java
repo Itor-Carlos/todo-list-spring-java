@@ -103,6 +103,12 @@ public class TodoController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Realize a search in database usign parameters")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Operation succeedd", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))
+        })
+    })
     @GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> find(@RequestParam(name = "id",required = false) Long id, @RequestParam(name = "name",required = false) String name, @RequestParam(name = "descricao",required = false) String descricao, @RequestParam(name = "todoStatus",required = false)TodoStatus todoStatus){
         List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
