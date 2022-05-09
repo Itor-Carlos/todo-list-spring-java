@@ -11,6 +11,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -25,6 +31,12 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @Operation(summary = "Get All Todos")//describe the objective of this method
+    @ApiResponses(value = {//maps the possible code states, their description, mediaType type and the returned object
+        @ApiResponse(responseCode = "200", description = "Operation succeeded", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Todo.class))
+        })
+    })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Todo>> listar(){
         List<Todo> listaGeral = this.todoService.getAll();
