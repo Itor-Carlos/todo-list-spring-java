@@ -96,7 +96,15 @@ public class TodoController {
         this.todoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-
+    @Operation(summary = "Change an existing Place usign id as parameter search")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Changed attribute in specific Todo", content = {
+            @Content(mediaType = "application/json")
+        }),
+        @ApiResponse(responseCode = "404", description = "Not found the Todo. Operation cannot continue", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
+        })
+    })
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") Long id){
         this.todoService.alterar(todoDTO.toTodo(),id);
