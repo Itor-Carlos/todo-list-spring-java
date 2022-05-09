@@ -5,6 +5,7 @@ import com.ifba.dev.todolist.enums.TodoStatus;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.exceptions.EntityNotFoundExceptionDetails;
 import com.ifba.dev.todolist.exceptions.IllegalArgumentExceptionDetails;
+import com.ifba.dev.todolist.exceptions.TodoFieldNotValidExceptionDetails;
 import com.ifba.dev.todolist.model.Todo;
 import com.ifba.dev.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,15 @@ public class TodoController {
         Todo todo = this.todoService.buscar(id);
         return ResponseEntity.ok(todo);
     }
-
+    @Operation(summary = "Create a Todo in database")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Todo created", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Todo.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Todo field is not valid", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = TodoFieldNotValidExceptionDetails.class))
+        })
+    })
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> salvar(@RequestBody @Valid TodoDTO todoDTO){
         Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
