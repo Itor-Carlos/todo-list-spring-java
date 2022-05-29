@@ -46,3 +46,10 @@ You can acess the api-docs from this application. To do this, go to <http://loca
     POST /todos
     DELETE /todos/{id}
     PUT /todos/{id}
+
+## This API will be modified in the future
+
+  + CORS configuration
+  + Profiles (test,dev,prod)
+  + Unit Tests and Integration Tests
+  + Docker
