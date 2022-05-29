@@ -27,3 +27,22 @@ create database todo_database
  + open `src/main/resources/application.properties`
 
  + change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
+
+
+**4. Build and run the app using maven**
+
+```bash
+mvn spring-boot:run
+```
+
+The application will be start running at <http://localhost:8080>
+
+You can acess the api-docs from this application. To do this, go to <http://localhost:8080/todo-api/swagger-ui/index.html> after start application
+
+## Explore the REST Api
+
+    GET /todos
+    GET /todos/{id}
+    POST /todos
+    DELETE /todos/{id}
+    PUT /todos/{id}
