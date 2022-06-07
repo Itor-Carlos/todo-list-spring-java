@@ -7,6 +7,7 @@ A project regarding the practice and study of API REST using Spring
 - Get all Todos
 - Get a specific Todo
 - Uptade a specific Todo
+- Search Todos
 
 ## Requirements
 
