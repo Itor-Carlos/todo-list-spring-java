@@ -1,6 +1,13 @@
 # todo-list-spring-java
 A project regarding the practice and study of API REST using Spring
 
+## Features
+
+- Save a Todo
+- Get all Todos
+- Get a specific Todo
+- Uptade a specific Todo
+
 ## Requirements
 
 1. Java - 1.8.x
