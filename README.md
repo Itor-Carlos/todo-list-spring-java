@@ -1,6 +1,16 @@
 # todo-list-spring-java
 A project regarding the practice and study of API REST using Spring
 
+## Technologies
+ 
+- Java
+- Spring Boot
+- MySQL
+- JPA
+- OpenSwagger
+- H2
+- JUnit
+
 ## Features
 
 - Save a Todo
