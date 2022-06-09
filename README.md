@@ -42,11 +42,13 @@ git clone https://github.com/Itor-Carlos/todo-list-spring-java.git
 create database todo_database
 ```
 
-**3. Change mysql username and password as per your installation**
+**3. You can choose the profile that will be used**
+ 
+ + To choose the profile, acess `src/main/resources/application.properties`
+ 
+ + If you choose test profile, acess `src/main/resources/application.properties` and change the parameter `spring.profiles.active` to `test`
 
- + open `src/main/resources/application.properties`
-
- + change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
+ + If you chose dev profile, acess `src/main/resources/application.properties` and  change the parameter `spring.profiles.active` to `test`. After the previous step, acess `src/main/resources/application-dev.properties` and change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
 
 
 **4. Build and run the app using maven**
