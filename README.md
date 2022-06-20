@@ -1,6 +1,8 @@
 # todo-list-spring-java
 A project regarding the practice and study of API REST using Spring
 
+## Project link on heroku: https://todo-list-spring-java.herokuapp.com/todos
+
 ## Technologies
  
 - Java
