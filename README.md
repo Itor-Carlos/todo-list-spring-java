@@ -14,6 +14,7 @@ A project regarding the practice and study of API REST using Spring
 - JUnit
 - Docker (future)
 - Heroku
+- Hibernate
 
 ## Features
 
