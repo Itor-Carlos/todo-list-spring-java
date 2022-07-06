@@ -66,7 +66,5 @@ mvn spring-boot:run
  + You can acess the api-docs from this application. To do this, go to <http://localhost:8080/todo-api/swagger-ui/index.html> after start application
 
 ## This API will be modified in the future
-
-  + CORS configuration
   + Unit Tests and Integration Tests
   + Docker
