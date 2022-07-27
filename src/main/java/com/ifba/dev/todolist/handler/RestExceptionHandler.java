@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.ifba.dev.todolist.controllers")
 public class RestExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
