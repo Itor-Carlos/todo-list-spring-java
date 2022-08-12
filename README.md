@@ -1,5 +1,5 @@
 # todo-list-spring-java
-A project regarding the practice and study of API REST using Spring (not complet yet)
+A project regarding the practice and study of API REST using Spring (not complet yet, miss tests)
 
 ## Project link on heroku: https://todo-list-spring-java.herokuapp.com/todos
 
