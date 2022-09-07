@@ -23,9 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.ResourceBundle;
+
 
 @RestController
 @RequestMapping(path = "/todos")
