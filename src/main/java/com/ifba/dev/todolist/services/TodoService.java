@@ -35,12 +35,12 @@ public class TodoService {
     }
 
     public void deletar(UUID id){
-        Todo todoSearched = this.todoRepository.findById(id);
+        Todo todoSearched = this.buscar(id);
         this.todoRepository.deleteById(id);
     }
 
     public void alterar(Todo todo, UUID id){
-        Todo todoSearched = this.todoRepository.findById(id);
+        Todo todoSearched = this.buscar(id);
         if(todoSearched == null){
             throw new EntityNotFoundException("nao foi encontrado nenhum Todo no id passado");
         }
