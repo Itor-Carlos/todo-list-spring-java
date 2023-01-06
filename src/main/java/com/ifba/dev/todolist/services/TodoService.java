@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -23,11 +24,10 @@ public class TodoService {
         return this.todoRepository.findAll();
     }
 
-    public Todo buscar(Long id){
-        if(id < 1){
-            throw new IllegalArgumentException("the id most be higher or equals 1");
-        }
-        return this.todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    public Todo buscar(UUID id){
+        Todo todoSearched = todoRepository.findById(id);
+        if(todoSearched == null) throw new EntityNotFoundException();
+        return todoSearched;
     }
 
     public Todo salvar(Todo todo){

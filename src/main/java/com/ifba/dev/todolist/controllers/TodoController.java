@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -57,7 +58,7 @@ public class TodoController {
         })
     })
     @GetMapping(path ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> buscar(@PathVariable("id") Long id){
+    public ResponseEntity<?> buscar(@PathVariable("id") UUID id){
         Todo todo = this.todoService.buscar(id);
         return ResponseEntity.ok(todo);
     }

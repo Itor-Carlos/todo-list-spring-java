@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Repository
 public class TodoRepositoryImpl {
@@ -86,5 +87,14 @@ public class TodoRepositoryImpl {
         Query queryUpdate = this.entityManager.createQuery(jpql.toString());
         parametros.forEach((key,value) -> queryUpdate.setParameter(key,value));
         queryUpdate.executeUpdate();
+    }
+
+    public Todo findById(UUID id){
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("from Todo Where id LIKE :id");
+
+        TypedQuery<Todo> searchQuery = this.entityManager.createQuery(jpql.toString(), Todo.class);
+        searchQuery.setParameter("id", id);
+        return searchQuery.getResultList().get(0);
     }
 }
