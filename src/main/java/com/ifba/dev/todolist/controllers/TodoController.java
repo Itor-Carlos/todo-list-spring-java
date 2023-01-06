@@ -117,7 +117,7 @@ public class TodoController {
         })
     })
     @GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> find(@RequestParam(name = "id",required = false) Long id, @RequestParam(name = "name",required = false) String name, @RequestParam(name = "descricao",required = false) String descricao, @RequestParam(name = "todoStatus",required = false)TodoStatus todoStatus){
+    public ResponseEntity<?> find(@RequestParam(name = "id",required = false) UUID id, @RequestParam(name = "name",required = false) String name, @RequestParam(name = "descricao",required = false) String descricao, @RequestParam(name = "todoStatus",required = false)TodoStatus todoStatus){
         List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
         return ResponseEntity.ok(listaResultado);
     }

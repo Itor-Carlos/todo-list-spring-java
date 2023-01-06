@@ -20,7 +20,7 @@ public class TodoRepositoryImpl {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus){
+    public List<Todo> find(UUID id, String name, String descricao, TodoStatus todoStatus){
 
         StringBuilder jpql = new StringBuilder();
         jpql.append("from Todo WHERE 0 = 0 ");

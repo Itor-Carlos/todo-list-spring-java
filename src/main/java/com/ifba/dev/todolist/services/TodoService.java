@@ -47,10 +47,7 @@ public class TodoService {
         this.todoRepository.updateTodo(id,todo);
     }
 
-    public List<Todo> find(Long id, String name, String descricao, TodoStatus todoStatus){
-        if(id != null && id < 1){
-            throw new IllegalArgumentException("the id most be higher or equals 1");
-        }
+    public List<Todo> find(UUID id, String name, String descricao, TodoStatus todoStatus){
         return this.todoRepository.find(id,name,descricao,todoStatus);
     }
 
