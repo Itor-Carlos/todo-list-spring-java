@@ -2,6 +2,8 @@ package com.ifba.dev.todolist.model;
 
 import com.ifba.dev.todolist.enums.TodoStatus;
 
+import java.util.UUID;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +11,9 @@ import javax.persistence.*;
 public class Todo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", updatable = false, unique = true, nullable = false)
+	private UUID id;
 
     @Column(name="name",nullable = false)
     private String name;
@@ -30,18 +33,18 @@ public class Todo {
         this.todoStatus = todoStatus;
     }
 
-    public Todo(Long id, String name, String descricao, TodoStatus todoStatus){
+    public Todo(UUID id, String name, String descricao, TodoStatus todoStatus){
         this.id = id;
         this.name = name;
         this.descricao = descricao;
         this.todoStatus = todoStatus;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
