@@ -54,8 +54,9 @@ public class TodoRepositoryImpl {
         return query.getResultList();
     }
 
-    public void deleteById(Long id){
-        Query query = entityManager.createQuery(("Delete FROM Todo WHERE id = " + id));
+    public void deleteById(UUID id){
+        Query query = entityManager.createQuery(("Delete FROM Todo WHERE id LIKE :id"));
+        query.setParameter("id", id);
         query.executeUpdate();
     }
 

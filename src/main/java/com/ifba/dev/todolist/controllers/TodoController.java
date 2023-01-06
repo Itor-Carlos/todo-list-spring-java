@@ -91,7 +91,7 @@ public class TodoController {
         })
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable("id") Long id){
+    public ResponseEntity<?> deletar(@PathVariable("id") UUID id){
         this.todoService.deletar(id);
         return ResponseEntity.noContent().build();
     }

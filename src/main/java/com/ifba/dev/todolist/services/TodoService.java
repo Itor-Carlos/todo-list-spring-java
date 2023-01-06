@@ -34,11 +34,8 @@ public class TodoService {
         return this.todoRepository.save(todo);
     }
 
-    public void deletar(Long id){
-        if(id < 1){
-            throw new IllegalArgumentException("the id most be higher or equals 1");
-        }
-        this.todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    public void deletar(UUID id){
+        Todo todoSearched = this.todoRepository.findById(id);
         this.todoRepository.deleteById(id);
     }
 
