@@ -105,7 +105,7 @@ public class TodoController {
         })
     })
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") Long id){
+    public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") UUID id){
         this.todoService.alterar(todoDTO.toTodo(),id);
         return ResponseEntity.ok().build();
     }

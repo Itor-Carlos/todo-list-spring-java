@@ -39,9 +39,9 @@ public class TodoService {
         this.todoRepository.deleteById(id);
     }
 
-    public void alterar(Todo todo, Long id){
-        Optional<Todo> optionalTodoModificado = this.todoRepository.findById(id);
-        if(!optionalTodoModificado.isPresent()){
+    public void alterar(Todo todo, UUID id){
+        Todo todoSearched = this.todoRepository.findById(id);
+        if(todoSearched == null){
             throw new EntityNotFoundException("nao foi encontrado nenhum Todo no id passado");
         }
         this.todoRepository.updateTodo(id,todo);

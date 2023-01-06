@@ -22,7 +22,7 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
     public void deleteById(UUID id);
 
     @Transactional
-    public void updateTodo(Long id, Todo todo);
+    public void updateTodo(UUID id, Todo todo);
 
     public Todo findById(UUID id);
 

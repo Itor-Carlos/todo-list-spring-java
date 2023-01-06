@@ -60,7 +60,7 @@ public class TodoRepositoryImpl {
         query.executeUpdate();
     }
 
-    public void updateTodo(Long id, Todo todo){
+    public void updateTodo(UUID id, Todo todo){
         StringBuilder jpql = new StringBuilder();
         jpql.append("UPDATE Todo SET id = :id ");
         Map<String,Object> parametros = new HashMap<>();
