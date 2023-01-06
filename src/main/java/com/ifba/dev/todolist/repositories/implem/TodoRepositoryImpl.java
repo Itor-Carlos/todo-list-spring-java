@@ -1,6 +1,7 @@
 package com.ifba.dev.todolist.repositories.implem;
 
 import com.ifba.dev.todolist.enums.TodoStatus;
+import com.ifba.dev.todolist.exceptions.EntityNotFoundException;
 import com.ifba.dev.todolist.model.Todo;
 import org.springframework.stereotype.Repository;
 
@@ -96,6 +97,7 @@ public class TodoRepositoryImpl {
 
         TypedQuery<Todo> searchQuery = this.entityManager.createQuery(jpql.toString(), Todo.class);
         searchQuery.setParameter("id", id);
-        return searchQuery.getResultList().get(0);
+        List<Todo> todoSearched = searchQuery.getResultList();
+        return todoSearched.isEmpty() ? null : todoSearched.get(0);
     }
 }
