@@ -40,6 +40,7 @@ public class TodoController {
         })
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
     public ResponseEntity<List<Todo>> listar(){
         List<Todo> listaGeral = this.todoService.getAll();
         return ResponseEntity.ok(listaGeral);
@@ -72,6 +73,7 @@ public class TodoController {
         })
     })
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
     public ResponseEntity<?> salvar(@RequestBody @Valid TodoDTO todoDTO){
         Todo todoSalvo = this.todoService.salvar(todoDTO.toTodo());
         URI location = URI.create("/todos/"+todoSalvo.getId());
@@ -90,6 +92,7 @@ public class TodoController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
         })
     })
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable("id") UUID id){
         this.todoService.deletar(id);
@@ -104,6 +107,7 @@ public class TodoController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = EntityNotFoundExceptionDetails.class))
         })
     })
+    @CrossOrigin
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> alterar(@RequestBody TodoDTO todoDTO, @PathVariable("id") UUID id){
         this.todoService.alterar(todoDTO.toTodo(),id);
@@ -116,6 +120,7 @@ public class TodoController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))
         })
     })
+    @CrossOrigin
     @GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> find(@RequestParam(name = "id",required = false) UUID id, @RequestParam(name = "name",required = false) String name, @RequestParam(name = "descricao",required = false) String descricao, @RequestParam(name = "todoStatus",required = false)TodoStatus todoStatus){
         List<Todo> listaResultado = this.todoService.find(id,name,descricao,todoStatus);
