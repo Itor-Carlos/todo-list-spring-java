@@ -20,7 +20,7 @@ A project regarding the practice and study of API REST using Spring (not complet
 - Get a specific Todo
 - Uptade a specific Todo
 - Delete a specific Todo
-- Search Todos
+- Filter Todos
 
 ## Requirements
 
