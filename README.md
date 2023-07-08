@@ -10,7 +10,6 @@ A project regarding the practice and study of API REST using Spring (not complet
 - OpenSwagger
 - H2
 - JUnit
-- Docker (future)
 - Hibernate
 
 ## Features
