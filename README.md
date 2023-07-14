@@ -9,8 +9,6 @@ A project regarding the practice and study of API REST using Spring (not complet
 - JPA
 - OpenSwagger
 - H2
-- JUnit
-- Hibernate
 
 ## Features
 
