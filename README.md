@@ -18,7 +18,7 @@ A project regarding the practice and study of API REST using Spring (not complet
 - Uptade a specific Todo
 - Delete a specific Todo
 - Filter Todos
-- Delete All Todo's
+- Delete All Todo's - Not done yet
 
 ## Requirements
 
